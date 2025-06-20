@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            height: 80vh;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Login Page Styles */
+        .login-container {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+        
+        .app-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2575fc;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+        }
+        
+        /* Home Page Styles */
+        .home-container {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .dropdown {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 15px 0;
+            width: 200px;
+            display: none;
+            z-index: 100;
+        }
+        
+        .dropdown.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        .dropdown-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .dropdown-item:hover {
+            background: #f5f7ff;
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .welcome-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #2575fc;
+        }
+        
+        .app-description {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .about-app-btn {
+            padding: 15px 40px;
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .about-app-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(37, 117, 252, 0.4);
+        }
+        
+        /* Welcome Page Styles */
+        .welcome-container {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .welcome-heading {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #6a11cb;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .welcome-text {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .back-btn {
+            padding: 15px 40px;
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(37, 117, 252, 0.4);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 14px;
+            background: #f9f9f9;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                height: 95vh;
+                border-radius: 15px;
+            }
+            
+            .app-title {
+                font-size: 2rem;
+            }
+            
+            .welcome-heading {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Page -->
+        <div class="login-container" id="loginPage">
+            <h1 class="app-title pulse">Welcome to My World</h1>
+            <div class="login-form">
+                <div class="input-group">
+                    <label for="username"><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" placeholder="Enter your username">
+                </div>
+                <div class="input-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                <button class="login-btn" id="loginBtn">Login</button>
+            </div>
+        </div>
+        
+        <!-- Home Page -->
+        <div class="home-container" id="homePage">
+            <div class="header">
+                <div class="logo">MyApp</div>
+                <button class="menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="dropdown-item">
+                        <i class="fas fa-user-cog"></i> Settings
+                    </div>
+                    <div class="dropdown-item">
+                        <i class="fas fa-user"></i> Profile
+                    </div>
+                    <div class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <h1 class="welcome-title">About App</h1>
+                <p class="app-description">
+                    This application allows you to explore amazing content and features. 
+                    Click below to discover more about what we offer.
+                </p>
+                <button class="about-app-btn" id="aboutBtn">
+                    Explore Now <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            
+            <div class="footer">
+                © 2023 MyApp. All rights reserved.
+            </div>
+        </div>
+        
+        <!-- Welcome Page -->
+        <div class="welcome-container" id="welcomePage">
+            <h1 class="welcome-heading">Hello, Welcome to My World!</h1>
+            <p class="welcome-text">
+                You've successfully entered our exclusive world. Explore and enjoy the unique features we have to offer.
+            </p>
+            <button class="back-btn" id="backBtn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const loginPage = document.getElementById('loginPage');
+        const homePage = document.getElementById('homePage');
+        const welcomePage = document.getElementById('welcomePage');
+        const loginBtn = document.getElementById('loginBtn');
+        const menuBtn = document.getElementById('menuBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const aboutBtn = document.getElementById('aboutBtn');
+        const backBtn = document.getElementById('backBtn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        
+        // Login Functionality
+        loginBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            if (username === '' || password === '') {
+                alert('Please enter both username and password');
+                return;
+            }
+            
+            // Simple validation - in a real app, you'd validate with a server
+            if (password.length < 4) {
+                alert('Password must be at least 4 characters');
+                return;
+            }
+            
+            // Hide login page and show home page
+            loginPage.style.display = 'none';
+            homePage.style.display = 'flex';
+            
+            // Clear inputs
+            usernameInput.value = '';
+            passwordInput.value = '';
+        });
+        
+        // Menu Button - Show/Hide Dropdown
+        menuBtn.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+        
+        // About App Button - Show Welcome Page
+        aboutBtn.addEventListener('click', () => {
+            homePage.style.display = 'none';
+            welcomePage.style.display = 'flex';
+        });
+        
+        // Back Button - Return to Home Page
+        backBtn.addEventListener('click', () => {
+            welcomePage.style.display = 'none';
+            homePage.style.display = 'flex';
+        });
+        
+        // Allow Enter key to trigger login
+        passwordInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
